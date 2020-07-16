@@ -359,7 +359,7 @@ function runPhan() {
     PHAN_DISABLE_XDEBUG_WARN=1 \
         ./vendor/bin/phan \
         --allow-polyfill-parser \
-        --directory ./src
+        --config-file ./tests/conf/phan.php
     [ $? -eq 0 ] && return 0 || return 1
 }
 

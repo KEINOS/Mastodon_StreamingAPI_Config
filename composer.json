@@ -24,6 +24,7 @@
     "require": {
         "php": "^8.0 || ^7.1",
         "ext-mbstring": "*",
+        "keinos/mastodon-streaming-api-cache": "^1.0.0-RC1",
         "symfony/http-client": "^4.4"
     },
     "require-dev": {
@@ -48,7 +49,10 @@
     },
     "autoload": {
         "psr-4": {
-            "KEINOS\\MSTDN_TOOLS\\": "src"
+            "KEINOS\\MSTDN_TOOLS\\Config\\": [
+                "src",
+                "src/Traits"
+            ]
         }
     },
     "autoload-dev": {
@@ -61,15 +65,19 @@
     },
     "scripts" :{
         "test": [
+            "# Run tests and analysis of the scripts. Use 'test help' option command for detail usage.",
             "./tests/run-tests.sh"
         ],
         "bench": [
+            "# Run benchmarks in ./bench directory",
             "./vendor/bin/phpbench run --report=aggregate --report=compare ./bench"
         ],
         "compile": [
-            "box compile --config=./.init/box.json"
+            "# Compile the sample script into Phar file",
+            "box compile --config=./.init/box.json && echo 'Inspecting phar file' && box info ./bin/Sample.phar && box info -l ./bin/Sample.phar"
         ],
         "dev": [
+            "# Boots up Docker container for development.",
             "Composer\\Config::disableProcessTimeout",
             "docker-compose run --rm --entrypoint='/bin/sh' --workdir='/app' -v $(pwd):/app dev < /dev/tty"
         ]

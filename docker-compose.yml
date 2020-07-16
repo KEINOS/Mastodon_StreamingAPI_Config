@@ -10,13 +10,15 @@ services:
         - NAME_IMAGE=php:7.4.3-cli-alpine
     environment:
       - COVERALLS_REPO_TOKEN
+    # Mount file/dir that might be changed after docker build
     volumes:
       - ./composer.json:/app/composer.json
       - ./.git/:/app/.git
+      - ./bin:/app/bin
+      - ./samples:/app/samples
       - ./src:/app/src
       - ./tests:/app/tests
       - ./report:/app/report
-      - ./bin:/app/bin
   dev:
     build:
       context: ./.devcontainer

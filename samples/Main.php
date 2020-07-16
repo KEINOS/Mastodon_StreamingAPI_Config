@@ -14,14 +14,12 @@ namespace KEINOS\SampleApp;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use KEINOS\MSTDN_TOOLS\Config;
-use Symfony\Component\HttpClient\HttpClient;
+use KEINOS\MSTDN_TOOLS\Config\Config;
 
-$obj = HttpClient::create();
-echo gettype($obj), PHP_EOL;
-echo get_class($obj), PHP_EOL;
-die;
+$config = new Config([
+    'url_host' => 'https://qiitadon.com/',
+]);
 
-$obj = new Config('https://mastodon.com/');
+$info_instance = $config->getInfoInstance();
 
-echo $obj->getUrlHost() . PHP_EOL;
+print_r($info_instance);

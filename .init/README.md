@@ -3,4 +3,6 @@
 This directory places script files that are needed only for initialization process of this package.
 
 - `setup-composer.sh`: Used in /.devcontainer and /.testcontainer
-- `initialize_package.php`: Used when this package is called via `composer create-project keinos/mastodon-streaming-api-config myNewProject` command
+- `box.json`: Used for Phar archiving the /samples/Main.php script.
+  - Run `$ composer compile` to generate a Phar app.
+  - [Box3](https://github.com/humbug/box) is required. Install `composer global require humbug/box`

@@ -1,20 +1,25 @@
 {
     "base-path": "./",
-    "main": "./src/Main.php",
+    "main": "./samples/Main.php",
     "blacklist": [
         ".devcontainer",
+        ".init",
         ".testcontainer",
         ".vscode",
-        ".init",
+        "bench",
+        "bin",
         "report",
         "tests",
         ".dockerignore",
         ".gitattributes",
         ".gitignore",
+        ".phpcs.xml",
+        ".scrutinizer.yml",
         ".travis.yml",
         "docker-compose.yml",
         "Dockerfile"
     ],
-    "output": "./bin/Mastodon_StreamingAPI_Config",
-    "force-autodiscovery": true
+    "output": "./bin/Sample.phar",
+    "force-autodiscovery": true,
+    "exclude-dev-files": true
 }

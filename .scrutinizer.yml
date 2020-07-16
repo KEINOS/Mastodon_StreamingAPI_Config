@@ -5,3 +5,7 @@ build:
         override:
           - php-scrutinizer-run --sub-project-dir=src/
           - phpcs-run --standard=.phpcs.xml
+
+filter:
+  dependency_paths:
+    - vendor/

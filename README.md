@@ -1,132 +1,69 @@
-[![Build Status](https://travis-ci.org/KEINOS/MastodonStreamingApiConfig.svg?branch=master)](https://travis-ci.org/KEINOS/MastodonStreamingApiConfig/builds)
-[![Coverage Status](https://coveralls.io/repos/github/KEINOS/MastodonStreamingApiConfig/badge.svg)](https://coveralls.io/github/KEINOS/MastodonStreamingApiConfig)
-[![](https://img.shields.io/scrutinizer/quality/g/KEINOS/MastodonStreamingApiConfig/master)](https://scrutinizer-ci.com/g/KEINOS/MastodonStreamingApiConfig/build-status/master "Scrutinizer code quality")
-[![](https://img.shields.io/packagist/php-v/keinos/mastodon-streaming-api-config)](https://github.com/KEINOS/MastodonStreamingApiConfig/blob/master/.travis.yml "Version Support")
+[![](https://api.travis-ci.org/KEINOS/Mastodon_StreamingAPI_Config.svg?branch=master)](https://travis-ci.org/KEINOS/Mastodon_StreamingAPI_Config/builds "View Build Status in Travis CI")
+[![](https://img.shields.io/coveralls/KEINOS/Mastodon_StreamingAPI_Config/master)](https://coveralls.io/github/KEINOS/Mastodon_StreamingAPI_Config?branch=master "View Coverage Status in COVERALLS")
+[![](https://img.shields.io/scrutinizer/quality/g/KEINOS/Mastodon_StreamingAPI_Config/master)](https://scrutinizer-ci.com/g/KEINOS/Mastodon_StreamingAPI_Config/build-status/master "View code quality in Scrutinizer")
+[![](https://img.shields.io/packagist/php-v/keinos/mastodon-streaming-api-config)](https://github.com/KEINOS/Mastodon_Streaming_API_Config/blob/master/.travis.yml "View version support in Packagist")
 
-# Super cautious "Hello-World"
+# Configuration Settings Class
 
-This repo is an overly cautious [Hello-World PHP script](./src/Main.php) for fun. It includes the following tests and CIs to just say "Hello-World!".
+This PHP class simply holds Mastodon server information from ["instance" API method](https://docs.joinmastodon.org/methods/instance/).
 
-## Tests
+Use this class to get the URI of [Mastodon Streaming API](https://docs.joinmastodon.org/methods/timelines/streaming/) for receiving messages from `server-sent events` or `WebSocket`.
 
-- Supported PHP Version to test
-  - PHP v7.1, 7.2, 7.3, 7.4 (, nightly)
-  - Details see: [.travis.yml](./.travis.yml)
-    - Note: The nightly build version (PHP8-dev) fails on purpose in TravisCI.
-- Unit Test & Code Coverage
-  - [PHPUnit](https://phpunit.de/)
-- Coding Standard Compliance
-  - [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) (PSR-2, PSR-12)
-  - [PHP Mess Detector](https://phpmd.org/) (Avoid complexity)
-- PHP Static Analysis
-  - [PHPStan](https://github.com/phpstan/phpstan)
-  - [PSalm](https://psalm.dev/)
-  - [Phan](https://github.com/phan/phan)
-- Benchmark
-  - [PHPBench](https://github.com/phpbench/phpbench)
-- Docker for Local Testing
-  - Details see: [docker-compose.yml](./docker-compose.yml)
+- Note: This class is aimed to be used in other [Mastodon StreamingAPI tools](https://github.com/search?q=user%3AKEINOS+Mastodon_StreamingAPI_).
 
-## CIs Used
+## Install
 
-This repo uses the following CIs. On your use, register your repo first.
+```bash
+composer require keinos/mastodon-streaming-api-config
+```
 
-- [TravisCI](https://travis-ci.org/): Used for running tests.
-- [COVERALLS](https://coveralls.io/): Used for code coverage.
-- [Scrutinizer CI](https://scrutinizer-ci.com/): Used for code quality.
+## Usage
 
-# Using this package as a template/boilerplate
+```php
+<?php
 
-<details><summary>How to</summary><div><br>
+namespace KEINOS\Sample;
 
-## How to use it as a template
+require_once __DIR__ . '/../vendor/autoload.php';
 
-1. Create a new copy.
+$conf = new \KEINOS\MSTDN_TOOLS\Config\Config([
+    'url_host' => 'https://qiitadon.com/', // Your server/instance URL
+]);
 
-    Choose one of the below command that suits you, to create a new project following your project name. (Ex. MyNewProject)
+$info_instance = $conf->getInfoInstance();
+$uri_websocket = $conf->getUriStreamingApi();
 
-    ```bash
-    # For composer user (No Docker)
-    composer create-project keinos/mastodon-streaming-api-config MyNewProject
-    cd MyNewProject
-    ```
+```
 
-    ```bash
-    # For composer and Docker user
-    composer create-project --no-dev keinos/mastodon-streaming-api-config MyNewProject
-    cd MyNewProject
-    ```
+If the server/instance is in [`WHITELIST_MODE`](https://docs.joinmastodon.org/admin/config/#basic) then you will need an access token to get the server information.
 
-    ```bash
-    # For Docker and docker-compose user (No PHP nor composer user)
-    git clone https://github.com/KEINOS/MastodonStreamingApiConfig.git MyNewProject
-    cd MyNewProject
-    rm -rf .git
-    ```
+```php
+<?php
 
-    **Note** that the project name provided (the "MyNewProject" above) will be the "package name" after the initialization below. Then the namespace will be something like "MyVendorName/MyNewProject".
+namespace KEINOS\Sample;
 
-2. Initialize.
+require_once __DIR__ . '/../vendor/autoload.php';
 
-    Run the script below, which will re-write the package and vendor names to the provided name. (Ex. MyVendorName)
+use KEINOS\MSTDN_TOOLS\Config\Config;
 
-    ```bash
-    ./.init/initialize_package.php MyVendorName
-    ```
+$conf = new Config([
+    'url_host'     => 'https://qiitadon.com/',
+    'access_token' => 'YOUR ACCESS TOKEN HERE',
+]);
 
-3. Functioning test.
+$info_instance = $conf->getInfoInstance();
+$uri_websocket = $conf->getUriStreamingApi();
+$access_token  = $cong->getAccessToken();
 
-    Before anything, run the tests to check it's basic test functionality.
+```
 
-    ```bash
-    composer test all verbose
-    ```
+- For other methods see the [interface of the Config class](https://github.com/KEINOS/Mastodon_StreamingAPI_Config/blob/master/src/ConfigInterface.php).
+  - [./src/ConfigInterface.php](./src/ConfigInterface.php)
 
-4. Initial commit.
+## Package Information
 
-    Create an empty Git repository and commit them.
-
-    ```bash
-    git init
-    git add .
-    git commit -m 'initial commit'
-    ```
-
-5. Push the repo to GitHub then register it to the following CIs.
-
-    - [TravisCI](https://travis-ci.org/)
-    - [COVERALLS](https://coveralls.io/)
-
-6. Re-name `ENVFILE.env.sample` to `ENVFILE.env`
-
-7. Get your access token from COVERALLS' settings and place/replace the token value in `ENVFILE.env`.
-
-8. Run tests again to see COVERALLS' function.
-
-9. If the local test passes then commit changes and push.
-
-10. If the tests passes on CIs then start building your project.
-
-## Developing via Docker
-
-This repo can be develop via Docker.
-
-
-## VS Code and Docker User
-
-If you use Visual Studio Code (a.k.a. VS Code) and have Docker installed, you can use **"Remote - Containers" extension** to develop your project over Docker container.
-
-In this case, you don't need to install the packages or even PHP on your local env.
-
-1. Install Microsoft's ["Remote - Containers"](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension to your VS Code.
-2. `git clone` this repo to your local.
-3. Remove the `.git` directory and initialize as a new one by `git init`.
-4. In VSCode, open the folder in Container by F1 -> "Remote-Containers".
-
-</div></details>
-
-## Credit
-
-This repo was very much inspired by:
-
-- [このPHPがテンプレートエンジンのくせに慎重すぎる](https://qiita.com/search?utf8=%E2%9C%93&sort=&q=title%3A%E3%81%93%E3%81%AEPHP%E3%81%8C%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E3%81%AE%E3%81%8F%E3%81%9B%E3%81%AB%E6%85%8E%E9%87%8D%E3%81%99%E3%81%8E%E3%82%8B) @ Qiita
+- Packagist: https://packagist.org/packages/keinos/mastodon-streaming-api-config
+- Source: https://github.com/KEINOS/Mastodon_StreamingAPI_Config
+- Issues: https://github.com/KEINOS/Mastodon_StreamingAPI_Config/issues
+- License: [MIT](https://github.com/KEINOS/Mastodon_StreamingAPI_Config/blob/master/LICENSE)
+- Authors: [KEINOS and the contributors](https://github.com/KEINOS/Mastodon_StreamingAPI_Config/graphs/contributors)

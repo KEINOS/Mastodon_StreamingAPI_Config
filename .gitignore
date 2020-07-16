@@ -4,6 +4,7 @@
 vendor
 tools
 report
+bin
 
 composer.lock
 COVERALLS.env
