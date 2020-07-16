@@ -4,7 +4,11 @@ env:
   global:
   - PHAN_DISABLE_XDEBUG_WARN=1
 
-install: /bin/bash ./.init/setup-composer.sh --dev && sudo snap install tree
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install tree
+
+install: /bin/bash ./.init/setup-composer.sh --dev
 
 matrix:
   include:
@@ -29,4 +33,3 @@ matrix:
 
 script:
   - /bin/bash ./tests/run-tests.sh local all
-
