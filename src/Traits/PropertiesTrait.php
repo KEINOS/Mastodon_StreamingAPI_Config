@@ -25,6 +25,17 @@ trait PropertiesTrait
     }
 
     /** @var string */
+    protected $endpoint_api_instance;
+    public function setEndpointApiInstance(string $path): void
+    {
+        $this->endpoint_api_instance = $path;
+    }
+    public function getEndpointApiInstance(): string
+    {
+        return $this->endpoint_api_instance;
+    }
+
+    /** @var string */
     protected $endpoint_api_streaming_local;
     public function setEndpointApiStreamingLocal(string $path): void
     {
@@ -44,17 +55,6 @@ trait PropertiesTrait
     public function getEndpointApiStreamingPublic(): string
     {
         return $this->endpoint_api_streaming_public;
-    }
-
-    /** @var string */
-    protected $endpoint_api_instance;
-    public function setEndpointApiInstance(string $path): void
-    {
-        $this->endpoint_api_instance = $path;
-    }
-    public function getEndpointApiInstance(): string
-    {
-        return $this->endpoint_api_instance;
     }
 
     /** @var bool */
