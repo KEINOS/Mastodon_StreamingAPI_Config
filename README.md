@@ -1,6 +1,6 @@
 [![](https://api.travis-ci.org/KEINOS/Mastodon_StreamingAPI_Config.svg?branch=master)](https://travis-ci.org/KEINOS/Mastodon_StreamingAPI_Config/builds "View Build Status in Travis CI")
 [![](https://img.shields.io/coveralls/KEINOS/Mastodon_StreamingAPI_Config/master)](https://coveralls.io/github/KEINOS/Mastodon_StreamingAPI_Config?branch=master "View Coverage Status in COVERALLS")
-[![](https://img.shields.io/scrutinizer/quality/g/KEINOS/Mastodon_StreamingAPI_Config/master)](https://scrutinizer-ci.com/g/KEINOS/Mastodon_StreamingAPI_Config/build-status/master "View code quality in Scrutinizer")
+[![](https://img.shields.io/scrutinizer/quality/g/KEINOS/Mastodon_StreamingAPI_Config/master)](https://scrutinizer-ci.com/g/KEINOS/Mastodon_StreamingAPI_Config/?branch=master "View code quality in Scrutinizer")
 [![](https://img.shields.io/packagist/php-v/keinos/mastodon-streaming-api-config)](https://github.com/KEINOS/Mastodon_Streaming_API_Config/blob/master/.travis.yml "View version support in Packagist")
 
 # Configuration Settings Class
