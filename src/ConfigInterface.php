@@ -33,17 +33,17 @@ interface ConfigInterface
      *
      * @param array<string,string> $settings
      *   Set information of the target server/instance.
-     *   Must "keys"
-     *     - "url_host" (string)
-     *
-     *   Optional "key name" => (value type)
+     *   - Keys and values available to set:
      *     [
+     *       "url_host"     => (string), // This is a MUST element. The others are optional.
      *       "access_token" => (string),
+     *       "endpoint_api_streaming_local"  => (string),
+     *       "endpoint_api_streaming_public" => (string),
      *       "endpoint_api_instance" => (string),
      *       "flag_use_cache" => (bool),
-     *       "prefix_cache" => (string),
-     *       "id_hash_self" => (string),
-     *       "ttl_cache" => (int),
+     *       "id_hash_self"   => (string),
+     *       "prefix_cache"   => (string),
+     *       "ttl_cache"      => (int),
      *     ];
      */
     public function __construct(array $settings);
@@ -57,6 +57,8 @@ interface ConfigInterface
      */
     public function setAccessToken(string $access_token): void;
     public function setEndpointApiInstance(string $path): void;
+    public function setEndpointApiStreamingLocal(string $path): void;
+    public function setEndpointApiStreamingPublic(string $path): void;
     public function setFlagUseCache(bool $flag): void;
     public function setIdHashSelf(string $id_hash_self): void;
     /** @param  array<mixed,mixed> $info_instance */
@@ -65,12 +67,16 @@ interface ConfigInterface
     public function setTtlCache(int $ttl): void;
     public function setUrlHost(string $url_host): void;
     public function setUrlApiInstance(string $url_api_instance): void;
+    public function setUrlApiStreamingLocal(string $url_api_streaming_local): void;
+    public function setUrlApiStreamingPublic(string $url_api_streaming_public): void;
 
     /**
      * Property getters.
      */
     public function getAccessToken(): string;
     public function getEndpointApiInstance(): string;
+    public function getEndpointApiStreamingLocal(): string;
+    public function getEndpointApiStreamingPublic(): string;
     public function getFlagUseCache(): bool;
     public function getIdHashSelf(): string;
     /** @return array<mixed,mixed> */
@@ -79,5 +85,6 @@ interface ConfigInterface
     public function getTtlCache(): int;
     public function getUrlHost(): string;
     public function getUrlApiInstance(): string;
-    public function getUriStreamingApi(): string;
+    public function getUrlApiStreamingLocal(): string;
+    public function getUrlApiStreamingPublic(): string;
 }
