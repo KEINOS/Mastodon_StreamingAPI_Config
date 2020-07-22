@@ -14,11 +14,13 @@ final class ConstructTest extends TestCase
             // Must
             'url_host' => 'https://news.yahoo.co.jp/',
             // Optional
-            'endpoint_api_instance' => '/categories/domestic',
+            'endpoint_api_instance'         => '/categories/domestic',
+            'endpoint_api_streaming_public' => '/api/v1/streaming/public',
+            'endpoint_api_streaming_local'  => '/api/v1/streaming/public/local',
             'flag_use_cache' => true,
-            'id_hash_self' => hash('md5', strval(mt_rand())),
-            'prefix_cache' => hash('md5', strval(mt_rand())),
-            'ttl_cache' => 60
+            'id_hash_self'   => hash('md5', strval(mt_rand())),
+            'prefix_cache'   => hash('md5', strval(mt_rand())),
+            'ttl_cache'      => 60
         ];
         $this->expectException(\Exception::class);
         $obj = new \KEINOS\MSTDN_TOOLS\Config\Config($settings);

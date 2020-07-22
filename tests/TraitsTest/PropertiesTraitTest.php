@@ -137,17 +137,6 @@ final class PropertiesTraitTest extends TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testSetAndGetUrlApiStreamingPublic()
-    {
-        $mock = $this->getMockForTrait(PropertiesTrait::class);
-
-        $expect = 'https://sample.com/api/v1/streaming/public';
-        $mock->setUrlApiStreamingPublic($expect);
-        $actual = $mock->getUrlApiStreamingPublic();
-
-        $this->assertSame($expect, $actual);
-    }
-
     public function testSetAndGetUrlApiStreamingLocal()
     {
         $mock = $this->getMockForTrait(PropertiesTrait::class);
@@ -155,6 +144,17 @@ final class PropertiesTraitTest extends TestCase
         $expect = 'https://sample.com/api/v1/streaming/public/local';
         $mock->setUrlApiStreamingLocal($expect);
         $actual = $mock->getUrlApiStreamingLocal();
+
+        $this->assertSame($expect, $actual);
+    }
+
+    public function testSetAndGetUrlApiStreamingPublic()
+    {
+        $mock = $this->getMockForTrait(PropertiesTrait::class);
+
+        $expect = 'https://sample.com/api/v1/streaming/public';
+        $mock->setUrlApiStreamingPublic($expect);
+        $actual = $mock->getUrlApiStreamingPublic();
 
         $this->assertSame($expect, $actual);
     }

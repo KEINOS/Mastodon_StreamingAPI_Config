@@ -37,6 +37,8 @@ class Config implements ConfigInterface
     public const ACCESS_TOKEN_DEFAULT = '';
     public const CACHE_PREFIX_DEFAULT = 'mstdn_tools_cache_';
     public const CACHE_TTL_DEFAULT    = 60 * 60 * 1; // 1 hour
+    public const ENDPOINT_API_STREAMING_LOCAL_DEFAULT  = '/api/v1/streaming/public/local';
+    public const ENDPOINT_API_STREAMING_PUBLIC_DEFAULT = '/api/v1/streaming/public';
     public const ENDPOINT_API_INSTANCE_DEFAULT = '/api/v1/instance';
     public const FLAG_USE_CACHE_DEFAULT = true;
 
@@ -51,10 +53,8 @@ class Config implements ConfigInterface
      */
     public function __construct(array $settings)
     {
-        /* Set must settings */
-        if (isset($settings['url_host'])) {
-            $this->setUrlHost($settings['url_host']);
-        } else {
+        /* Check must settings */
+        if (! isset($settings['url_host'])) {
             $msg = '"url_host" key missing. URL of the Mastodon server/instance is required.';
             throw new \Exception($msg);
         }
@@ -171,6 +171,8 @@ class Config implements ConfigInterface
     protected function setDefaultSettings(): void
     {
         $this->setAccessToken(self::ACCESS_TOKEN_DEFAULT);
+        $this->setEndpointApiStreamingLocal(self::ENDPOINT_API_STREAMING_LOCAL_DEFAULT);
+        $this->setEndpointApiStreamingPublic(self::ENDPOINT_API_STREAMING_PUBLIC_DEFAULT);
         $this->setEndpointApiInstance(self::ENDPOINT_API_INSTANCE_DEFAULT);
         $this->setFlagUseCache(self::FLAG_USE_CACHE_DEFAULT);
         $this->setIdHashSelf(strval(hash_file('md5', __FILE__)));
@@ -186,12 +188,15 @@ class Config implements ConfigInterface
     protected function setOptionalSettings(array $settings): void
     {
         $list_key_to_method = [
-            'access_token'          => 'setAccessToken',
-            'endpoint_api_instance' => 'setEndpointApiInstance',
-            'flag_use_cache'        => 'setFlagUseCache',
-            'prefix_cache'          => 'setPrefixCache',
-            'id_hash_self'          => 'setIdHashSelf',
-            'ttl_cache'             => 'setTtlCache',
+            'url_host'       => 'setUrlHost', // Not optional but set here
+            'access_token'   => 'setAccessToken',
+            'flag_use_cache' => 'setFlagUseCache',
+            'prefix_cache'   => 'setPrefixCache',
+            'id_hash_self'   => 'setIdHashSelf',
+            'ttl_cache'      => 'setTtlCache',
+            'endpoint_api_streaming_public' => 'setEndpointApiStreamingPublic',
+            'endpoint_api_streaming_local'  => 'setEndpointApiStreamingLocal',
+            'endpoint_api_instance'         => 'setEndpointApiInstance',
         ];
 
         foreach ($settings as $key => $value) {

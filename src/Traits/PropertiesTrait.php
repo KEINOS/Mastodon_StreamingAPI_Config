@@ -25,6 +25,28 @@ trait PropertiesTrait
     }
 
     /** @var string */
+    protected $endpoint_api_streaming_local;
+    public function setEndpointApiStreamingLocal(string $path): void
+    {
+        $this->endpoint_api_streaming_local = $path;
+    }
+    public function getEndpointApiStreamingLocal(): string
+    {
+        return $this->endpoint_api_streaming_local;
+    }
+
+    /** @var string */
+    protected $endpoint_api_streaming_public;
+    public function setEndpointApiStreamingPublic(string $path): void
+    {
+        $this->endpoint_api_streaming_public = $path;
+    }
+    public function getEndpointApiStreamingPublic(): string
+    {
+        return $this->endpoint_api_streaming_public;
+    }
+
+    /** @var string */
     protected $endpoint_api_instance;
     public function setEndpointApiInstance(string $path): void
     {
@@ -112,5 +134,27 @@ trait PropertiesTrait
     public function getUrlApiInstance(): string
     {
         return $this->url_api_instance;
+    }
+
+    /** @var string */
+    protected $url_api_streaming_local;
+    public function setUrlApiStreamingLocal(string $url_api_streaming_local): void
+    {
+        $this->url_api_streaming_local = $url_api_streaming_local;
+    }
+    public function getUrlApiStreamingLocal(): string
+    {
+        return $this->url_api_streaming_local;
+    }
+
+    /** @var string */
+    protected $url_api_streaming_public;
+    public function setUrlApiStreamingPublic(string $url_api_streaming_public): void
+    {
+        $this->url_api_streaming_public = $url_api_streaming_public;
+    }
+    public function getUrlApiStreamingPublic(): string
+    {
+        return $this->url_api_streaming_public;
     }
 }
