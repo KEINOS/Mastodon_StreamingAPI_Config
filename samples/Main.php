@@ -3,9 +3,9 @@
 /**
  * Main script.
  *
- * Overly-Cautious Development of Hello World!.
+ * This is a sample to use "keinos/mastodon-streaming-api-config" package.
+ * Don't forget to `composer require keinos/mastodon-streaming-api-config` before use.
  *
- * @standard PSR2
  */
 
 declare(strict_types=1);
